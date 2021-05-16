@@ -6,3 +6,7 @@ compiler.version=4.7
 compiler.libcxx=libstdc++11
 build_type=Release
 manufacturer=Verifone
+
+[build_requires]
+cmake/3.20.2
+ninja/1.10.2
