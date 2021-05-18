@@ -7,6 +7,7 @@ To generate the engage-adk package:
 * Copy all folders in `adk-full-ext-xxx/vos2` folder to the root of the package, the package will look like this:
 
 ```
+adk-full-ext-xxx/vos2
 ├───abi
 ├───bin
 ├───include

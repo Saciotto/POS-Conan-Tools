@@ -13,7 +13,7 @@ class EngageAdkConan(ConanFile):
 
     def package(self):
         tools.save("version.txt", self.version)
-        self.copy('*', excludes=["conanfile.py", "test_package"])
+        self.copy('*', excludes=["conanfile.py", "test_package, readme.md"])
         
     def package_info(self):
         self.output.info(f'Creating self.env_info.SYSROOT: {self.package_folder}')

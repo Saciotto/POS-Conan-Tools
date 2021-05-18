@@ -47,38 +47,38 @@ module where to look.
 #]=======================================================================]
 
 if(NOT DEFINED EngageADK_ROOT_DIR)
-    set(EngageADK_ROOT_DIR "${CMAKE_SYSROOT}")
+  set(EngageADK_ROOT_DIR "${CMAKE_SYSROOT}")
 endif()
 
 set(EngageADK_INCLUDE_DIRS
-    "${EngageADK_ROOT_DIR}/include"
-    "${EngageADK_ROOT_DIR}/usr/include"
-    "${EngageADK_ROOT_DIR}/usr/local/include"
+  "${EngageADK_ROOT_DIR}/include"
+  "${EngageADK_ROOT_DIR}/usr/include"
+  "${EngageADK_ROOT_DIR}/usr/local/include"
 )
 
 set(EngageADK_LIBRARIES)
 
 macro(adk_add_library name)
-    add_library(EngageADK::${name} UNKNOWN IMPORTED)
-    set_target_properties(
-        EngageADK::${name}
-      PROPERTIES
-        IMPORTED_LOCATION "${EngageADK_${name}_LIBRARY}"
-        INTERFACE_INCLUDE_DIRECTORIES "${EngageADK_INCLUDE_DIRS}"
-    )
-    list(APPEND EngageADK_LIBRARIES "${EngageADK_${name}_LIBRARY}")
+  add_library(EngageADK::${name} UNKNOWN IMPORTED)
+  set_target_properties(
+      EngageADK::${name}
+    PROPERTIES
+      IMPORTED_LOCATION "${EngageADK_${name}_LIBRARY}"
+      INTERFACE_INCLUDE_DIRECTORIES "${EngageADK_INCLUDE_DIRS}"
+  )
+  list(APPEND EngageADK_LIBRARIES "${EngageADK_${name}_LIBRARY}")
 endmacro()
 
 macro(adk_add_shared_library name)
-    add_library(EngageADK::${name} SHARED IMPORTED)
-    set_target_properties(
-        EngageADK::${name}
-      PROPERTIES
-        IMPORTED_LOCATION "${EngageADK_${name}_LIBRARY}"
-        INTERFACE_INCLUDE_DIRECTORIES "${EngageADK_INCLUDE_DIRS}"
-        IMPORTED_NO_SONAME TRUE
-    )
-    list(APPEND EngageADK_LIBRARIES "${EngageADK_${name}_LIBRARY}")
+  add_library(EngageADK::${name} SHARED IMPORTED)
+  set_target_properties(
+      EngageADK::${name}
+    PROPERTIES
+      IMPORTED_LOCATION "${EngageADK_${name}_LIBRARY}"
+      INTERFACE_INCLUDE_DIRECTORIES "${EngageADK_INCLUDE_DIRS}"
+      IMPORTED_NO_SONAME TRUE
+  )
+  list(APPEND EngageADK_LIBRARIES "${EngageADK_${name}_LIBRARY}")
 endmacro()
 
 find_library(EngageADK_com_LIBRARY NAMES com)
@@ -119,23 +119,23 @@ find_library(EngageADK_svc_sound_LIBRARY NAMES svc_sound PATH_SUFFIXES svcmgr)
 find_library(EngageADK_svc_utility_LIBRARY NAMES svc_utility PATH_SUFFIXES svcmgr)
 
 set (EngageADK_DEFINITIONS
-    VFI_PLATAFORM_VOS
-    _VOS
-    _VOS2
+  VFI_PLATAFORM_VOS
+  _VOS
+  _VOS2
 )
 
 if(EXISTS "${EngageADK_ROOT_DIR}/version.txt")
-    file(STRINGS "${EngageADK_ROOT_DIR}/version.txt" VERSION_FILE)
-    string(REGEX REPLACE "^([0-9]+).*$" "\\1" EngageADK_VERSION_MAJOR "${VERSION_FILE}")
-    string(REGEX REPLACE "^[0-9]+\\.([0-9]+).*$" "\\1" EngageADK_VERSION_MINOR  "${VERSION_FILE}")
-    string(REGEX REPLACE "^[0-9]+\\.[0-9]+\\.([0-9]+).*$" "\\1" EngageADK_VERSION_PATCH "${VERSION_FILE}")
-    set(EngageADK_VERSION "${EngageADK_VERSION_MAJOR}.${EngageADK_VERSION_MINOR}.${EngageADK_VERSION_PATCH}")
+  file(STRINGS "${EngageADK_ROOT_DIR}/version.txt" VERSION_FILE)
+  string(REGEX REPLACE "^([0-9]+).*$" "\\1" EngageADK_VERSION_MAJOR "${VERSION_FILE}")
+  string(REGEX REPLACE "^[0-9]+\\.([0-9]+).*$" "\\1" EngageADK_VERSION_MINOR  "${VERSION_FILE}")
+  string(REGEX REPLACE "^[0-9]+\\.[0-9]+\\.([0-9]+).*$" "\\1" EngageADK_VERSION_PATCH "${VERSION_FILE}")
+  set(EngageADK_VERSION "${EngageADK_VERSION_MAJOR}.${EngageADK_VERSION_MINOR}.${EngageADK_VERSION_PATCH}")
 
-    set(EngageADK_VERSION_TWEAK "")
-    if("${VERSION_FILE}" MATCHES "^[0-9]+\\.[0-9]+\\.[0-9]+\\.([0-9]+)")
-        set(EngageADK_VERSION_TWEAK "${CMAKE_MATCH_1}")
-        string(APPEND EngageADK_VERSION ".${EngageADK_VERSION_TWEAK}")
-    endif()
+  set(EngageADK_VERSION_TWEAK "")
+  if("${VERSION_FILE}" MATCHES "^[0-9]+\\.[0-9]+\\.[0-9]+\\.([0-9]+)")
+    set(EngageADK_VERSION_TWEAK "${CMAKE_MATCH_1}")
+    string(APPEND EngageADK_VERSION ".${EngageADK_VERSION_TWEAK}")
+  endif()
 endif()
 
 include(FindPackageHandleStandardArgs)
@@ -185,99 +185,99 @@ find_package_handle_standard_args(
 )
 
 if(EngageADK_FOUND AND NOT TARGET EngageADK::EngageADK)
-    adk_add_shared_library(com)
-    adk_add_shared_library(dl)
-    adk_add_library(emv_ct_client)
-    adk_add_shared_library(emv_ct_framework)
-    adk_add_shared_library(emv_ct_link)
-    adk_add_library(emv_ctls_client)
-    adk_add_shared_library(emv_ctls_framework)
-    adk_add_shared_library(emv_ctls_link)
-    adk_add_shared_library(evt)
-    adk_add_shared_library(expat)
-    adk_add_shared_library(inf)
-    adk_add_shared_library(log)
-    adk_add_shared_library(msr)
-    adk_add_shared_library(pthread)
-    adk_add_shared_library(rt)
-    adk_add_shared_library(sqlite)
-    adk_add_shared_library(ssl)
-    adk_add_shared_library(svc_tms)
-    adk_add_shared_library(tlv_util)
-    adk_add_shared_library(vfibuzzer)
-    adk_add_shared_library(vfiguiprt)
-    adk_add_shared_library(vfiipc)
-    adk_add_shared_library(vfimac)
-    adk_add_shared_library(vfisec)
-    adk_add_shared_library(vfisysinfo)
-    adk_add_shared_library(crypto)
-    adk_add_shared_library(vfigsm)
-    adk_add_shared_library(vfisyspm)
-    adk_add_shared_library(z)
-    adk_add_shared_library(svc_logmgr)
-    adk_add_shared_library(svc_led)
-    adk_add_shared_library(svc_event)
-    adk_add_shared_library(svc_netloader)
-    adk_add_shared_library(svc_security)
-    adk_add_shared_library(svc_sound)
-    adk_add_shared_library(svc_utility)
+  adk_add_shared_library(com)
+  adk_add_shared_library(dl)
+  adk_add_library(emv_ct_client)
+  adk_add_shared_library(emv_ct_framework)
+  adk_add_shared_library(emv_ct_link)
+  adk_add_library(emv_ctls_client)
+  adk_add_shared_library(emv_ctls_framework)
+  adk_add_shared_library(emv_ctls_link)
+  adk_add_shared_library(evt)
+  adk_add_shared_library(expat)
+  adk_add_shared_library(inf)
+  adk_add_shared_library(log)
+  adk_add_shared_library(msr)
+  adk_add_shared_library(pthread)
+  adk_add_shared_library(rt)
+  adk_add_shared_library(sqlite)
+  adk_add_shared_library(ssl)
+  adk_add_shared_library(svc_tms)
+  adk_add_shared_library(tlv_util)
+  adk_add_shared_library(vfibuzzer)
+  adk_add_shared_library(vfiguiprt)
+  adk_add_shared_library(vfiipc)
+  adk_add_shared_library(vfimac)
+  adk_add_shared_library(vfisec)
+  adk_add_shared_library(vfisysinfo)
+  adk_add_shared_library(crypto)
+  adk_add_shared_library(vfigsm)
+  adk_add_shared_library(vfisyspm)
+  adk_add_shared_library(z)
+  adk_add_shared_library(svc_logmgr)
+  adk_add_shared_library(svc_led)
+  adk_add_shared_library(svc_event)
+  adk_add_shared_library(svc_netloader)
+  adk_add_shared_library(svc_security)
+  adk_add_shared_library(svc_sound)
+  adk_add_shared_library(svc_utility)
 
-    add_library(EngageADK::definitions INTERFACE IMPORTED)
-    target_compile_definitions(
-        EngageADK::definitions
-      INTERFACE
-        VFI_PLATAFORM_VOS
-        _VOS
-        _VOS2
-    )
+  add_library(EngageADK::definitions INTERFACE IMPORTED)
+  target_compile_definitions(
+      EngageADK::definitions
+    INTERFACE
+      VFI_PLATAFORM_VOS
+      _VOS
+      _VOS2
+  )
 
-    add_library(EngageADK::EngageADK INTERFACE IMPORTED)
+  add_library(EngageADK::EngageADK INTERFACE IMPORTED)
 
-    target_compile_definitions(
-        EngageADK::definitions
-      INTERFACE
-        ${EngageADK_DEFINITIONS}
-    )
+  target_compile_definitions(
+      EngageADK::definitions
+    INTERFACE
+      ${EngageADK_DEFINITIONS}
+  )
 
-    target_link_libraries(
-        EngageADK::EngageADK
-      INTERFACE
-        EngageADK::definitions
-        EngageADK::com
-        EngageADK::dl
-        EngageADK::emv_ct_client
-        EngageADK::emv_ct_framework
-        EngageADK::emv_ct_link
-        EngageADK::emv_ctls_client
-        EngageADK::emv_ctls_framework
-        EngageADK::emv_ctls_link
-        EngageADK::evt
-        EngageADK::expat
-        EngageADK::inf
-        EngageADK::log
-        EngageADK::msr
-        EngageADK::pthread
-        EngageADK::rt
-        EngageADK::sqlite
-        EngageADK::ssl
-        EngageADK::svc_tms
-        EngageADK::tlv_util
-        EngageADK::vfibuzzer
-        EngageADK::vfiguiprt
-        EngageADK::vfiipc
-        EngageADK::vfimac
-        EngageADK::vfisec
-        EngageADK::vfisysinfo
-        EngageADK::crypto
-        EngageADK::vfigsm
-        EngageADK::vfisyspm
-        EngageADK::z
-        EngageADK::svc_logmgr
-        EngageADK::svc_led
-        EngageADK::svc_event
-        EngageADK::svc_netloader
-        EngageADK::svc_security
-        EngageADK::svc_sound
-        EngageADK::svc_utility
-    )
+  target_link_libraries(
+      EngageADK::EngageADK
+    INTERFACE
+      EngageADK::definitions
+      EngageADK::com
+      EngageADK::dl
+      EngageADK::emv_ct_client
+      EngageADK::emv_ct_framework
+      EngageADK::emv_ct_link
+      EngageADK::emv_ctls_client
+      EngageADK::emv_ctls_framework
+      EngageADK::emv_ctls_link
+      EngageADK::evt
+      EngageADK::expat
+      EngageADK::inf
+      EngageADK::log
+      EngageADK::msr
+      EngageADK::pthread
+      EngageADK::rt
+      EngageADK::sqlite
+      EngageADK::ssl
+      EngageADK::svc_tms
+      EngageADK::tlv_util
+      EngageADK::vfibuzzer
+      EngageADK::vfiguiprt
+      EngageADK::vfiipc
+      EngageADK::vfimac
+      EngageADK::vfisec
+      EngageADK::vfisysinfo
+      EngageADK::crypto
+      EngageADK::vfigsm
+      EngageADK::vfisyspm
+      EngageADK::z
+      EngageADK::svc_logmgr
+      EngageADK::svc_led
+      EngageADK::svc_event
+      EngageADK::svc_netloader
+      EngageADK::svc_security
+      EngageADK::svc_sound
+      EngageADK::svc_utility
+  )
 endif()
