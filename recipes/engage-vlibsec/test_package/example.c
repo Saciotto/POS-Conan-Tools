@@ -1,6 +1,4 @@
-extern "C" {
 #include <v-libsec.h>
-}
 
 int main() 
 {

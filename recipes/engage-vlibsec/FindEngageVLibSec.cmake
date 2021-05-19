@@ -23,6 +23,8 @@ This will define the following variables:
   The path to v-libsec.h
 ``EngageVLibSec_INCLUDE_DIRS``
   Include directories needed to use vlibsec.
+``EngageVLibSec_LIBRARY``
+  The libvlibsec.a library.
 ``EngageVLibSec_LIBRARIES``
   Libraries needed to link to vlibsec.
 ``EngageVLibSec_VERSION``
@@ -78,6 +80,7 @@ find_package_handle_standard_args(
 
 if(EngageVLibSec_FOUND AND NOT TARGET EngageVLibSec::EngageVLibSec)
   set(EngageVLibSec_INCLUDE_DIRS "${EngageVLibSec_INCLUDE_DIR}")
+  set(EngageVLibSec_LIBRARIES "${EngageVLibSec_LIBRARY}")
 
   add_library(EngageVLibSec::EngageVLibSec STATIC IMPORTED)
   set_target_properties(
