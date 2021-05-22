@@ -8,7 +8,7 @@ class EngageVLibSecConan(ConanFile):
     url = 'https://github.com/Saciotto/pos-conan-tools'
     author = 'Matheus Rossi Saciotto'
     description = 'Key manager for Verifone Engage'
-    settings = 'os', 'arch'
+    settings = 'os', 'arch', 'manufacturer'
     exports_sources = 'FindEngageVLibSec.cmake'
 
     def package(self):

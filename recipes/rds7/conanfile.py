@@ -15,7 +15,6 @@ class RDS7Conan(ConanFile):
         tools.save("rds7_version.txt", self.version)
         self.copy('*.a', dst='lib', keep_path=False , excludes=['export/*'], ignore_case=True)
         self.copy('*.h', dst='include', keep_path=False)
-        self.copy('export/*')
         self.copy('FindRDS7.cmake')
         self.copy('rds7_version.txt')
         

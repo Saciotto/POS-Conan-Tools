@@ -39,3 +39,16 @@ In any folder, execute:
 ```
 conan upload engage-toolchain/version --all -r remote
 ```
+
+# Examples
+
+```
+# Generate
+conan export-pkg C:/Workspace/pos-conan-tools/recipes/engage-toolchain/conanfile.py engage-toolchain/13.03@pos/stable
+
+# Test
+conan test test_package engage-toolchain/13.03@pos/stable --profile:build=default
+
+# Upload
+conan upload engage-toolchain/13.03 --all -r local
+```

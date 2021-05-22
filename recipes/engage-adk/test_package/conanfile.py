@@ -6,7 +6,6 @@ from conans import ConanFile, CMake
 class TestEngageAdkConan(ConanFile):
     settings = "os", "arch"
     generators = "cmake_paths"
-    build_requires = "engage-toolchain/13.03"
 
     def build(self):
         cmake = CMake(self, generator="Ninja")

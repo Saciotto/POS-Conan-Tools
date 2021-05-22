@@ -8,7 +8,7 @@ class EngageAdkConan(ConanFile):
     url = 'https://github.com/Saciotto/pos-conan-tools'
     author = 'Matheus Rossi Saciotto'
     description = 'Core libraries for Verifone Engage'
-    settings = 'os', 'arch'
+    settings = 'os', 'arch', 'manufacturer'
     exports_sources = "FindEngageADK.cmake"
 
     def package(self):

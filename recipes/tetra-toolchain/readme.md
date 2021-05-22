@@ -38,3 +38,16 @@ In any folder, execute:
 ```
 conan upload tetra-toolchain/version --all -r remote
 ```
+
+# Examples
+
+```
+# Generate
+conan export-pkg C:/Workspace/pos-conan-tools/recipes/tetra-toolchain/conanfile.py tetra-toolchain/8.20.26@pos/stable
+
+# Test
+conan test test_package tetra-toolchain/8.20.26@pos/stable --profile:build=default
+
+# Upload
+conan upload tetra-toolchain/8.20.26 --all -r local
+```

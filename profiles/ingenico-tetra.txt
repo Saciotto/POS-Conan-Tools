@@ -10,3 +10,4 @@ manufacturer=Ingenico
 [build_requires]
 cmake/3.20.2
 ninja/1.10.2
+tetra-toolchain/8.20.26@pos/stable
