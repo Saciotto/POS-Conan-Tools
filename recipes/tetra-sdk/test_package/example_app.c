@@ -8,6 +8,8 @@
 
 int Main(unsigned int size, StructPt *data)
 {
+    (void) size;
+    (void) data;
     NO_SEGMENT No = ApplicationGetCurrent();
     return foo();
 }

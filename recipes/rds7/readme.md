@@ -15,7 +15,7 @@ conan export-pkg path/to/conanfile.py rds7/version@user/channel -pr=path/to/prof
 In **this folder**, execute:
 
 ```
-conan test test_package rds7/version@user/channel --profile:build=default --profile:host=path/to/profile.txt
+conan test test_package_model rds7/version@user/channel --profile:build=default --profile:host=path/to/profile.txt
 ```
 
 # Upload the package
