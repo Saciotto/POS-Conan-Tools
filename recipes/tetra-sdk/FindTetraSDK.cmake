@@ -9,6 +9,10 @@ Imported Targets
 
 This module provides the following imported targets, if found:
 
+``TetraSDK::application``
+  The TetraSDK library to link against applications.
+``TetraSDK::library``
+  The TetraSDK library to link against libraries.
 ``TetraSDK::TetraSDK``
   The TetraSDK library
 ``TetraSDK::TPlusEntry``
